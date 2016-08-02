@@ -18,15 +18,12 @@
 </script>
 
 <style>
-  html {
-    height: 100vh;
-  }
+  html, body {margin:0;padding:0}
 
   body {
-    display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
-    height: 100%;
   }
 
   #app {

@@ -58,6 +58,6 @@
   }
 
   .container {
-    position: center, fixed;
+    position: center;
   }
 </style>
