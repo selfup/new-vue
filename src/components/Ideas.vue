@@ -32,7 +32,8 @@
         ideas: initIdeas(),
         title: '',
         body: '',
-        quality: ''
+        quality: '',
+        searchTerm: ''
       }
     },
     methods: {
@@ -77,6 +78,28 @@
           this.sortSwillTop()
           sortGenius = true
         }
+      },
+      search () {
+        let matchedIdeas = []
+        if (this.searchTerm === '') {
+          this.ideas = initIdeas()
+          this.searched = false
+          return
+        }
+        this.searched = true
+        matchedIdeas = this.searchSegments(matchedIdeas)
+        if (matchedIdeas[0] !== undefined) this.ideas = matchedIdeas
+      },
+      searchSegments (matchedIdeas) {
+        const searchTerm = this.searchTerm.toLowerCase()
+        this.ideas.forEach(idea => {
+          const t = idea.title.toLowerCase().includes(searchTerm)
+          const b = idea.body.toLowerCase().includes(searchTerm)
+          if (t || b) {
+            matchedIdeas.push(idea)
+          }
+        })
+        return matchedIdeas
       }
     }
   }
@@ -85,13 +108,23 @@
 <template>
   <div class="container">
     <div class="input-container container">
-      <div v-if="ideas.length > 1">
-        <button
-          class="btn btn-primary" 
-          v-on:click="sortbyquality"
-        >
-        Sort By Quality
-        </button>
+      <div class="sort-search-container container">
+        <div v-if="ideas.length > 1 || searched">
+          <button
+            class="btn btn-primary" 
+            v-on:click="sortbyquality"
+          >
+          Sort By Quality
+          </button>
+          <h3>Search</h3>
+          <input 
+            class="form-control" 
+            v-model="searchTerm" 
+            v-on:keyup="search"
+          >
+        </div>
+        <div v-else><h2>Add a new Idea<h2></div>
+        <br>
       </div>
       <h3>Title:</h3>
       
@@ -148,10 +181,6 @@
 </template>
 
 <style scoped>
-  h1 {
-    color: #42b983;
-  }
-
   button {
     border-radius: 0px;
     margin: 10px;
@@ -175,6 +204,15 @@
     margin-top: 5px;
     width: 90%;
     box-shadow: 2px 2px 5px grey;
+  }
+
+  .sort-search-container {
+    background-color: #438fb2;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 90%;
+    box-shadow: 2px 2px 5px grey;
+    position: center;
   }
 
   .up {
