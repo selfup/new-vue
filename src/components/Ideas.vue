@@ -24,6 +24,8 @@
     Genius: 'Plausible'
   }
 
+  let sortGenius = true
+
   export default {
     data () {
       return {
@@ -61,8 +63,20 @@
         currentIdea.quality = qualityUp[currentIdea.quality]
         lspi.setRecord('ideas', this.ideas)
       },
+      sortGeniusTop () {
+        this.ideas.sort((a, b) => { return a.quality > b.quality })
+      },
+      sortSwillTop () {
+        this.ideas.sort((a, b) => { return a.quality < b.quality })
+      },
       sortbyquality () {
-        this.ideas = this.ideas.sort()
+        if (sortGenius) {
+          this.sortGeniusTop()
+          sortGenius = false
+        } else {
+          this.sortSwillTop()
+          sortGenius = true
+        }
       }
     }
   }
