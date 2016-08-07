@@ -10,3 +10,5 @@ describe('Hello.vue', () => {
     expect(vm.$el.querySelector('h2').textContent).to.contain('Idea Box in Vue.js!')
   })
 })
+
+// testing double remote
