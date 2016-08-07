@@ -7,6 +7,6 @@ describe('Hello.vue', () => {
       template: '<div><ideas></ideas></div>',
       components: { Ideas }
     }).$mount()
-    expect(vm.$el.querySelector('.hello h1').textContent).to.contain('Hello World!')
+    expect(vm.$el.querySelector('h2').textContent).to.contain('Idea Box in Vue.js!')
   })
 })
