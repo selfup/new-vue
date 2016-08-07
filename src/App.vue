@@ -10,7 +10,6 @@
 
 <template>
   <div id="app" class="container">
-    <h2>Idea Box in Vue.js!</h2>
     <ideas></ideas>
   </div>
 </template>

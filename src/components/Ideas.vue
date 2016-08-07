@@ -1,88 +1,76 @@
 <script>
-  import Lspi from 'lspi'
-
-  const lspi = new Lspi()
-
-  const initIdeas = () => {
-    if (!lspi.getRecord('ideas')) {
-      lspi.setRecord('ideas', [])
-      return []
-    } else {
-      return lspi.getRecord('ideas')
-    }
-  }
-
-  const qualityUp = {
-    Swill: 'Plausible',
-    Plausible: 'Genius',
-    Genius: 'Genius'
-  }
-
-  const qualityDown = {
-    Swill: 'Swill',
-    Plausible: 'Swill',
-    Genius: 'Plausible'
-  }
-
-  let sortGenius = true
+  import IdeasHelper from './../component-helpers/idea-helper'
 
   export default {
     data () {
       return {
-        ideas: initIdeas(),
+        ideas: IdeasHelper.initIdeas(),
         title: '',
         body: '',
-        quality: '',
         searchTerm: ''
       }
     },
+
     methods: {
       addidea () {
         const title = this.title.trim()
         const body = this.body.trim()
         if (title && body) {
-          this.ideas.unshift({ title: title, body: body, quality: 'Swill' })
-          lspi.setRecord('ideas', this.ideas)
+          this.ideas.unshift({
+            title: title,
+            body: body,
+            quality: 'Swill',
+            edit: false
+          })
+          IdeasHelper.lspi.setRecord('ideas', this.ideas)
           this.clearInput()
         }
       },
+
       removeidea (index) {
         this.ideas.splice(index, 1)
-        lspi.setRecord('ideas', this.ideas)
+        IdeasHelper.lspi.setRecord('ideas', this.ideas)
       },
+
       clearInput () {
         this.title = ''
         this.body = ''
       },
+
       qualitydown (index) {
         let currentIdea = this.ideas[index]
-        currentIdea.quality = qualityDown[currentIdea.quality]
-        lspi.setRecord('ideas', this.ideas)
+        currentIdea.quality = IdeasHelper.qualityDown[currentIdea.quality]
+        IdeasHelper.lspi.setRecord('ideas', this.ideas)
       },
+
       qualityup (index) {
         let currentIdea = this.ideas[index]
-        currentIdea.quality = qualityUp[currentIdea.quality]
-        lspi.setRecord('ideas', this.ideas)
+        currentIdea.quality = IdeasHelper.qualityUp[currentIdea.quality]
+        IdeasHelper.lspi.setRecord('ideas', this.ideas)
       },
+
       sortGeniusTop () {
         this.ideas.sort((a, b) => { return a.quality > b.quality })
       },
+
       sortSwillTop () {
         this.ideas.sort((a, b) => { return a.quality < b.quality })
       },
+
       sortbyquality () {
-        if (sortGenius) {
+        if (IdeasHelper.sortGenius) {
           this.sortGeniusTop()
-          sortGenius = false
+          IdeasHelper.sortGenius = false
         } else {
           this.sortSwillTop()
-          sortGenius = true
+          IdeasHelper.sortGenius = true
         }
       },
+
       search () {
         let matchedIdeas = []
         if (this.searchTerm === '') {
-          this.ideas = initIdeas()
+          this.ideas = IdeasHelper.initIdeas()
           this.searched = false
           return
         }
@@ -90,6 +78,7 @@
         matchedIdeas = this.searchSegments(matchedIdeas)
         if (matchedIdeas[0] !== undefined) this.ideas = matchedIdeas
       },
+
       searchSegments (matchedIdeas) {
         const searchTerm = this.searchTerm.toLowerCase()
         this.ideas.forEach(idea => {
@@ -100,6 +89,22 @@
           }
         })
         return matchedIdeas
+      },
+
+      updateidea (event, index) {
+        event.preventDefault()
+        const newText = event.target.textContent.trim()
+        if (event.target.className === 'idea-title') {
+          this.ideas[index].title = newText
+        } else if (event.target.className === 'idea-body') {
+          this.ideas[index].body = newText
+        }
+        this.ideas[index].edit = false
+        IdeasHelper.lspi.setRecord('ideas', this.ideas)
+      },
+
+      editidea (index) {
+        this.ideas[index].edit = true
       }
     }
   }
@@ -123,19 +128,18 @@
             v-on:keyup="search"
           >
         </div>
-        <div v-else><h2>Add a new Idea<h2></div>
+        <div v-else>
+          <h2>Idea Box in Vue.js!</h2>
+        </div>
         <br>
       </div>
-      <h3>Title:</h3>
-      
+      <h3>Title</h3>
       <input 
         class="form-control" 
         v-model="title" 
         v-on:keyup.enter="addidea"
       >
-
-      <h3>Body:</h3> 
-
+      <h3>Body</h3> 
       <input 
         class="form-control" 
         v-model="body" 
@@ -148,13 +152,28 @@
       Submit
       </button>
     </div>
-
     <div v-for="idea in ideas">
       <div class="idea-container container">
-        <h4>Title:</h4>
-        <h5>{{ idea.title }}</h5>
-        <h4>Body:</h4>
-        <h5>{{ idea.body }}</h5>
+        <h4>Title</h4>
+        <h5
+          data-id={{$index}}
+          class="idea-title"
+          v-on:click="editidea($index)"
+          v-on:keyup.enter="updateidea($event, $index)"
+          contenteditable="{{idea.edit}}"
+        >
+        {{ idea.title }}
+        </h5>
+        <h4>Body</h4>
+        <h5
+          data-id={{$index}}
+          class="idea-body"
+          v-on:click="editidea($index)"
+          v-on:keydown.enter="updateidea($event, $index)"
+          contenteditable="{{idea.edit}}"
+        >
+        {{ idea.body }}
+        </h5>
         <h4>
           Quality
           <span 
@@ -188,6 +207,7 @@
 
   input {
     border-radius: 0px;
+    background-color: #fff8d6;
   }
 
   .idea-container {
@@ -201,17 +221,15 @@
   .input-container {
     background-color: #fca664;
     margin-bottom: 5px;
-    margin-top: 5px;
     width: 90%;
     box-shadow: 2px 2px 5px grey;
   }
 
   .sort-search-container {
-    background-color: #438fb2;
+    background-color: grey;
     margin-bottom: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
     width: 90%;
-    box-shadow: 2px 2px 5px grey;
     position: center;
   }
 
