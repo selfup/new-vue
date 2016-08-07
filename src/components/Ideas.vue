@@ -156,7 +156,6 @@
       <div class="idea-container container">
         <h4>Title</h4>
         <h5
-          data-id={{$index}}
           class="idea-title"
           v-on:click="editidea($index)"
           v-on:keydown.enter="updateidea($event, $index)"
@@ -166,7 +165,6 @@
         </h5>
         <h4>Body</h4>
         <h5
-          data-id={{$index}}
           class="idea-body"
           v-on:click="editidea($index)"
           v-on:keydown.enter="updateidea($event, $index)"
