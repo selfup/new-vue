@@ -159,7 +159,7 @@
           data-id={{$index}}
           class="idea-title"
           v-on:click="editidea($index)"
-          v-on:keyup.enter="updateidea($event, $index)"
+          v-on:keydown.enter="updateidea($event, $index)"
           contenteditable="{{idea.edit}}"
         >
         {{ idea.title }}
