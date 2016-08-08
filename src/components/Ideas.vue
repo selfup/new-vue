@@ -50,21 +50,18 @@
       },
 
       sortGeniusTop () {
+        IdeasHelper.sortGenius = false
         this.ideas.sort((a, b) => { return a.quality > b.quality })
       },
 
       sortSwillTop () {
+        IdeasHelper.sortGenius = true
         this.ideas.sort((a, b) => { return a.quality < b.quality })
       },
 
       sortbyquality () {
-        if (IdeasHelper.sortGenius) {
-          this.sortGeniusTop()
-          IdeasHelper.sortGenius = false
-        } else {
-          this.sortSwillTop()
-          IdeasHelper.sortGenius = true
-        }
+        if (IdeasHelper.sortGenius) return this.sortGeniusTop()
+        this.sortSwillTop()
       },
 
       search () {
