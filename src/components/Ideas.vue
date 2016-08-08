@@ -41,6 +41,11 @@
         this.body = ''
       },
 
+      clearallideas () {
+        this.ideas = []
+        IdeasHelper.lspi.setRecord('ideas', [])
+      },
+
       qualitydown (index) {
         let currentIdea = this.ideas[index]
         currentIdea.quality = IdeasHelper.qualityDown[currentIdea.quality]
@@ -119,6 +124,12 @@
             v-on:click="sortbyquality"
           >
           Sort By Quality
+          </button>
+          <button
+            class="btn btn-warning"
+            v-on:click="clearallideas"
+          >
+          Clear All Ideas
           </button>
           <h3>Search</h3>
           <input
