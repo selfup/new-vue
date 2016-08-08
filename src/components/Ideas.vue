@@ -69,12 +69,17 @@
 
       search () {
         if (this.searchTerm === '') return this.reload()
-        const matchedIdeas = this.searchSegments([])
-        if (matchedIdeas[0] !== undefined) this.ideas = matchedIdeas
+        this.matches(this.searchSegments([]))
       },
 
       reload () {
+        this.searched = false
         this.ideas = IdeasHelper.initIdeas()
+      },
+
+      matches (matchedIdeas) {
+        this.searched = true
+        if (matchedIdeas[0] !== undefined) this.ideas = matchedIdeas
       },
 
       searchSegments (matchedIdeas) {
