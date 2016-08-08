@@ -16,15 +16,19 @@
         const title = this.title.trim()
         const body = this.body.trim()
         if (title && body) {
-          this.ideas.unshift({
-            title: title,
-            body: body,
-            quality: 'Swill',
-            edit: false
-          })
+          this.createIdea(title, body)
           IdeasHelper.lspi.setRecord('ideas', this.ideas)
           this.clearInput()
         }
+      },
+
+      createIdea (body, title) {
+        this.ideas.unshift({
+          title: title,
+          body: body,
+          quality: 'Swill',
+          edit: false
+        })
       },
 
       removeidea (index) {
