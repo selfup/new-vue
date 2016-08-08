@@ -50,56 +50,51 @@
       },
 
       sortGeniusTop () {
+        IdeasHelper.sortGenius = false
         this.ideas.sort((a, b) => { return a.quality > b.quality })
       },
 
       sortSwillTop () {
+        IdeasHelper.sortGenius = true
         this.ideas.sort((a, b) => { return a.quality < b.quality })
       },
 
       sortbyquality () {
-        if (IdeasHelper.sortGenius) {
-          this.sortGeniusTop()
-          IdeasHelper.sortGenius = false
-        } else {
-          this.sortSwillTop()
-          IdeasHelper.sortGenius = true
-        }
+        if (IdeasHelper.sortGenius) return this.sortGeniusTop()
+        this.sortSwillTop()
       },
 
       search () {
-        let matchedIdeas = []
-        if (this.searchTerm === '') {
-          this.ideas = IdeasHelper.initIdeas()
-          this.searched = false
-          return
-        }
+        if (this.searchTerm === '') return this.reload()
+        this.matches(this.searchSegments([]))
+      },
+
+      reload () {
+        this.searched = false
+        this.ideas = IdeasHelper.initIdeas()
+      },
+
+      matches (matchedIdeas) {
         this.searched = true
-        matchedIdeas = this.searchSegments(matchedIdeas)
         if (matchedIdeas[0] !== undefined) this.ideas = matchedIdeas
       },
 
       searchSegments (matchedIdeas) {
         const searchTerm = this.searchTerm.toLowerCase()
         this.ideas.forEach(idea => {
-          const t = idea.title.toLowerCase().includes(searchTerm)
-          const b = idea.body.toLowerCase().includes(searchTerm)
-          if (t || b) {
-            matchedIdeas.push(idea)
-          }
+          const title = idea.title.toLowerCase().includes(searchTerm)
+          const body = idea.body.toLowerCase().includes(searchTerm)
+          if (title || body) matchedIdeas.push(idea)
         })
         return matchedIdeas
       },
 
-      updateidea (event, index) {
-        event.preventDefault()
-        const newText = event.target.textContent.trim()
-        if (event.target.className === 'idea-title') {
-          this.ideas[index].title = newText
-        } else if (event.target.className === 'idea-body') {
-          this.ideas[index].body = newText
-        }
-        this.ideas[index].edit = false
+      updateidea (e, i) {
+        e.preventDefault()
+        const newText = e.target.textContent.trim()
+        if (e.target.className === 'idea-title') this.ideas[i].title = newText
+        if (e.target.className === 'idea-body') this.ideas[i].body = newText
+        this.ideas[i].edit = false
         IdeasHelper.lspi.setRecord('ideas', this.ideas)
       },
 
@@ -116,15 +111,15 @@
       <div class="sort-search-container container">
         <div v-if="ideas.length > 1 || searched">
           <button
-            class="btn btn-primary" 
+            class="btn btn-primary"
             v-on:click="sortbyquality"
           >
           Sort By Quality
           </button>
           <h3>Search</h3>
-          <input 
-            class="form-control" 
-            v-model="searchTerm" 
+          <input
+            class="form-control"
+            v-model="searchTerm"
             v-on:keyup="search"
           >
         </div>
@@ -134,19 +129,19 @@
         <br>
       </div>
       <h3>Title</h3>
-      <input 
-        class="form-control" 
-        v-model="title" 
+      <input
+        class="form-control"
+        v-model="title"
         v-on:keyup.enter="addidea"
       >
-      <h3>Body</h3> 
-      <input 
-        class="form-control" 
-        v-model="body" 
+      <h3>Body</h3>
+      <input
+        class="form-control"
+        v-model="body"
         v-on:keyup.enter="addidea"
       >
-      <button 
-        class="btn btn-success" 
+      <button
+        class="btn btn-success"
         v-on:click="addidea"
       >
       Submit
@@ -174,20 +169,20 @@
         </h5>
         <h4>
           Quality
-          <span 
-            class="glyphicon glyphicon-chevron-up up" 
+          <span
+            class="glyphicon glyphicon-chevron-up up"
             v-on:click="qualityup($index)"
           >
           </span>
-          <span 
+          <span
             class="glyphicon glyphicon-chevron-down down"
             v-on:click="qualitydown($index)"
           >
           </span>
         </h4>
         <h5><em>{{ idea.quality }}</em></h5>
-        <button 
-          class="btn btn-danger" 
+        <button
+          class="btn btn-danger"
           v-on:click="removeidea($index)"
         >
         Remove idea
