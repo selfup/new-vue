@@ -22,7 +22,7 @@
         }
       },
 
-      createIdea (body, title) {
+      createIdea (title, body) {
         this.ideas.unshift({
           title: title,
           body: body,
