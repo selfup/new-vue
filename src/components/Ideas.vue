@@ -222,7 +222,7 @@
     background-color: #c6c4c4;
     margin-bottom: 5px;
     margin-top: 5px;
-    width: 70%;
+    width: 90%;
     box-shadow: 2px 2px 5px grey;
   }
 
