@@ -1,2 +1,4 @@
 build/*.js
 config/*.js
+App.vue
+service-worker.js
