@@ -1,6 +1,17 @@
 <script>
   import Ideas from './components/Ideas'
 
+  const registerServiceWorker = () => {
+    navigator.serviceWorker.register('/static/service-worker.js').then((reg) => {
+      console.log("Service worker registered")
+      reg.update().then((reg) => {
+        console.log("Cached Assets UPDATED");
+      });
+    })
+  };
+
+  registerServiceWorker();
+
   export default {
     components: {
       Ideas
