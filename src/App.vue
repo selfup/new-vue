@@ -2,18 +2,26 @@
   import Ideas from './components/Ideas'
 
   const registerServiceWorker = () => {
-    if (!navigator.serviceWoker) return console.log("no service worker")
+    const httpsCheck = window.location.href.split('')[4]
+    const lh = 'localhost:8080'
+
+    if (httpsCheck !== 's' && !window.location.href.includes(lh)) return
+    if (!navigator.serviceWorker) return
+
     navigator
       .serviceWorker
-        .register('/static/service-worker.js').then(reg => {
-          console.log("Service worker registered")
-            reg.update().then(reg => {
-              console.log("Cached Assets UPDATED");
-            });
-        })
-  };
+        .register('/static/service-worker.js')
+          .then(reg => {
+            console.log("Service worker registered")
+              reg
+                .update()
+                  .then(reg => {
+                    console.log("Cached Assets UPDATED")
+                  })
+          })
+  }
 
-  registerServiceWorker();
+  registerServiceWorker()
 
   export default {
     components: {
