@@ -184,18 +184,18 @@
         </h5>
         <hr>
           <span
-            class="glyphicon glyphicon-chevron-up up"
+            class="glyphicon glyphicon-chevron-up up topleft"
             v-on:click="qualityup($index)"
           >
           </span>
           <span
-            class="glyphicon glyphicon-chevron-down down"
+            class="glyphicon glyphicon-chevron-down down topleftdown"
             v-on:click="qualitydown($index)"
           >
           </span>
         <span><em>{{ idea.quality }}</em></span><br>
         <span
-          class="glyphicon glyphicon-remove btn btn-danger btn-xs topright"
+          class="glyphicon glyphicon-remove topright"
           v-on:click="removeidea($index)"
         >
         </span>
@@ -263,6 +263,20 @@
       position: absolute;
       top: 8px;
       right: 16px;
+      font-size: 18px;
+  }
+
+  .topleftdown {
+      position: absolute;
+      top: 8px;
+      left: 50px;
+      font-size: 18px;
+  }
+
+  .topleft {
+      position: absolute;
+      top: 8px;
+      left: 16px;
       font-size: 18px;
   }
 </style>
