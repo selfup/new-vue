@@ -3,10 +3,10 @@
 
   const registerServiceWorker = () => {
     const httpsCheck = window.location.href.split('')[4]
-    const lh = 'localhost:8080'
+    const lh         = 'localhost:8080'
 
-    if (httpsCheck !== 's' && !window.location.href.includes(lh)) return
-    if (!navigator.serviceWorker) return
+    if ( httpsCheck !== 's' && !window.location.href.includes(lh)) return
+    if (!navigator.serviceWorker)                                  return
 
     navigator
       .serviceWorker
