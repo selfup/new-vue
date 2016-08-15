@@ -4,6 +4,7 @@
   export default {
     data () {
       return {
+        helper: IdeasHelper,
         ideas: IdeasHelper.initIdeas(),
         title: '',
         body: '',
@@ -59,17 +60,17 @@
       },
 
       sortGeniusTop () {
-        IdeasHelper.sortGenius = false
-        this.ideas.sort((a, b) => { return a.quality > b.quality })
+        this.helper.sortGenius = false
+        this.ideas.sort((a, b) => { return a.quality > b.quality ? 1 : -1 })
       },
 
       sortSwillTop () {
-        IdeasHelper.sortGenius = true
-        this.ideas.sort((a, b) => { return a.quality < b.quality })
+        this.helper.sortGenius = true
+        this.ideas.sort((a, b) => { return a.quality < b.quality ? 1 : -1 })
       },
 
       sortbyquality () {
-        if (IdeasHelper.sortGenius) return this.sortGeniusTop()
+        if (this.helper.sortGenius) return this.sortGeniusTop()
         this.sortSwillTop()
       },
 
@@ -80,7 +81,7 @@
 
       reload () {
         this.searched = false
-        this.ideas = IdeasHelper.initIdeas()
+        this.ideas = this.helper.initIdeas()
       },
 
       matches (matchedIdeas) {
