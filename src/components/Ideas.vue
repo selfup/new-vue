@@ -121,18 +121,18 @@
       <div class="sort-search-container container">
         <div v-if="ideas.length > 1 || searched">
           <button
-            class="btn btn-primary"
+            class="btn btn-primary btn-sm"
             v-on:click="sortbyquality"
           >
           Sort By Quality
           </button>
           <button
-            class="btn btn-warning"
+            class="btn btn-warning btn-sm"
             v-on:click="clearallideas"
           >
           Clear All Ideas
           </button>
-          <h3>Search</h3>
+          <h4>Search</h4>
           <input
             class="form-control"
             v-model="searchTerm"
@@ -144,13 +144,13 @@
         </div>
         <br>
       </div>
-      <h3>Title</h3>
+      <h4>Title</h4>
       <input
         class="form-control"
         v-model="title"
         v-on:keyup.enter="addidea"
       >
-      <h3>Body</h3>
+      <h4>Body</h4>
       <input
         class="form-control"
         v-model="body"
@@ -165,16 +165,15 @@
     </div>
     <div v-for="idea in ideas">
       <div class="idea-container container">
-        <h4>Title</h4>
-        <h5
+        <br>
+        <h4
           class="idea-title"
           v-on:click="editidea($index)"
           v-on:keydown.enter="updateidea($event, $index)"
           contenteditable="{{idea.edit}}"
         >
         {{ idea.title }}
-        </h5>
-        <h4>Body</h4>
+        </h4>
         <h5
           class="idea-body"
           v-on:click="editidea($index)"
@@ -183,8 +182,7 @@
         >
         {{ idea.body }}
         </h5>
-        <h4>
-          Quality
+        <hr>
           <span
             class="glyphicon glyphicon-chevron-up up"
             v-on:click="qualityup($index)"
@@ -195,13 +193,13 @@
             v-on:click="qualitydown($index)"
           >
           </span>
-        </h4>
-        <h5><em>{{ idea.quality }}</em></h5>
-        <button
-          class="btn btn-danger"
+        <span><em>{{ idea.quality }}</em></span><br>
+        <span
+          class="glyphicon glyphicon-remove btn btn-danger btn-xs topright"
           v-on:click="removeidea($index)"
         >
-        Remove idea
+        </span>
+        <br>
         </button>
       </div>
     </div>
@@ -214,12 +212,22 @@
     margin: 10px;
   }
 
+  .btn {
+    border-radius: 0px;
+  }
+
   input {
     border-radius: 0px;
     background-color: #fff8d6;
   }
 
+  hr {
+    width: 100%;
+    border-color: grey;
+  }
+
   .idea-container {
+    position: relative;
     background-color: #c6c4c4;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -230,6 +238,7 @@
   .input-container {
     background-color: #fca664;
     margin-bottom: 5px;
+    margin-top: 5px;
     width: 90%;
     box-shadow: 2px 2px 5px grey;
   }
@@ -248,5 +257,12 @@
 
   .down {
     color: #C9302C;
+  }
+
+  .topright {
+      position: absolute;
+      top: 8px;
+      right: 16px;
+      font-size: 18px;
   }
 </style>
