@@ -18,7 +18,7 @@
         const body = this.body.trim()
         if (title && body) {
           this.createIdea(title, body)
-          IdeasHelper.lspi.setRecord('ideas', this.ideas)
+          this.helper.lspi.setRecord('ideas', this.ideas)
           this.clearInput()
         }
       },
@@ -34,7 +34,7 @@
 
       removeidea (index) {
         this.ideas.splice(index, 1)
-        IdeasHelper.lspi.setRecord('ideas', this.ideas)
+        this.helper.lspi.setRecord('ideas', this.ideas)
       },
 
       clearInput () {
@@ -44,19 +44,19 @@
 
       clearallideas () {
         this.ideas = []
-        IdeasHelper.lspi.setRecord('ideas', [])
+        this.helper.lspi.setRecord('ideas', [])
       },
 
       qualitydown (index) {
         let currentIdea = this.ideas[index]
-        currentIdea.quality = IdeasHelper.qualityDown[currentIdea.quality]
-        IdeasHelper.lspi.setRecord('ideas', this.ideas)
+        currentIdea.quality = this.helper.qualityDown[currentIdea.quality]
+        this.helper.lspi.setRecord('ideas', this.ideas)
       },
 
       qualityup (index) {
         let currentIdea = this.ideas[index]
-        currentIdea.quality = IdeasHelper.qualityUp[currentIdea.quality]
-        IdeasHelper.lspi.setRecord('ideas', this.ideas)
+        currentIdea.quality = this.helper.qualityUp[currentIdea.quality]
+        this.helper.lspi.setRecord('ideas', this.ideas)
       },
 
       sortGeniusTop () {
@@ -105,7 +105,7 @@
         if (e.target.className === 'idea-title') this.ideas[i].title = newText
         if (e.target.className === 'idea-body') this.ideas[i].body = newText
         this.ideas[i].edit = false
-        IdeasHelper.lspi.setRecord('ideas', this.ideas)
+        this.helper.lspi.setRecord('ideas', this.ideas)
       },
 
       editidea (index) {
@@ -208,7 +208,7 @@
 
 <style scoped>
   button {
-    border-radius: 0px;
+    border-radius: 25px;
     margin: 10px;
   }
 
@@ -218,7 +218,6 @@
 
   input {
     border-radius: 0px;
-    background-color: #fff8d6;
   }
 
   hr {
@@ -228,7 +227,7 @@
 
   .idea-container {
     position: relative;
-    background-color: #c6c4c4;
+    background-color: white;
     margin-bottom: 5px;
     margin-top: 5px;
     width: 90%;
@@ -236,7 +235,7 @@
   }
 
   .input-container {
-    background-color: #fca664;
+    background-image: linear-gradient(90deg, #53d6d6, #45c69d ); 
     margin-bottom: 5px;
     margin-top: 5px;
     width: 90%;
@@ -244,7 +243,8 @@
   }
 
   .sort-search-container {
-    background-color: grey;
+    background-color: #57c8f2;
+    box-shadow: 2px 2px 5px grey;
     margin-bottom: 5px;
     margin-top: 10px;
     width: 90%;
