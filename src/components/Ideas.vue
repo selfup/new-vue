@@ -208,7 +208,7 @@
 
 <style scoped>
   button {
-    border-radius: 0px;
+    border-radius: 25px;
     margin: 10px;
   }
 
@@ -218,7 +218,6 @@
 
   input {
     border-radius: 0px;
-    background-color: #fff8d6;
   }
 
   hr {
@@ -228,7 +227,7 @@
 
   .idea-container {
     position: relative;
-    background-color: #c6c4c4;
+    background-color: white;
     margin-bottom: 5px;
     margin-top: 5px;
     width: 90%;
@@ -236,7 +235,7 @@
   }
 
   .input-container {
-    background-color: #fca664;
+    background-image: linear-gradient(90deg, #53d6d6, #45c69d ); 
     margin-bottom: 5px;
     margin-top: 5px;
     width: 90%;
@@ -244,7 +243,8 @@
   }
 
   .sort-search-container {
-    background-color: grey;
+    background-color: #57c8f2;
+    box-shadow: 2px 2px 5px grey;
     margin-bottom: 5px;
     margin-top: 10px;
     width: 90%;
