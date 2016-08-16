@@ -18,7 +18,7 @@
         const body = this.body.trim()
         if (title && body) {
           this.createIdea(title, body)
-          IdeasHelper.lspi.setRecord('ideas', this.ideas)
+          this.helper.lspi.setRecord('ideas', this.ideas)
           this.clearInput()
         }
       },
@@ -34,7 +34,7 @@
 
       removeidea (index) {
         this.ideas.splice(index, 1)
-        IdeasHelper.lspi.setRecord('ideas', this.ideas)
+        this.helper.lspi.setRecord('ideas', this.ideas)
       },
 
       clearInput () {
@@ -44,19 +44,19 @@
 
       clearallideas () {
         this.ideas = []
-        IdeasHelper.lspi.setRecord('ideas', [])
+        this.helper.lspi.setRecord('ideas', [])
       },
 
       qualitydown (index) {
         let currentIdea = this.ideas[index]
-        currentIdea.quality = IdeasHelper.qualityDown[currentIdea.quality]
-        IdeasHelper.lspi.setRecord('ideas', this.ideas)
+        currentIdea.quality = this.helper.qualityDown[currentIdea.quality]
+        this.helper.lspi.setRecord('ideas', this.ideas)
       },
 
       qualityup (index) {
         let currentIdea = this.ideas[index]
-        currentIdea.quality = IdeasHelper.qualityUp[currentIdea.quality]
-        IdeasHelper.lspi.setRecord('ideas', this.ideas)
+        currentIdea.quality = this.helper.qualityUp[currentIdea.quality]
+        this.helper.lspi.setRecord('ideas', this.ideas)
       },
 
       sortGeniusTop () {
@@ -105,7 +105,7 @@
         if (e.target.className === 'idea-title') this.ideas[i].title = newText
         if (e.target.className === 'idea-body') this.ideas[i].body = newText
         this.ideas[i].edit = false
-        IdeasHelper.lspi.setRecord('ideas', this.ideas)
+        this.helper.lspi.setRecord('ideas', this.ideas)
       },
 
       editidea (index) {
