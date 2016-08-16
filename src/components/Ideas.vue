@@ -234,6 +234,10 @@
     box-shadow: 2px 2px 5px grey;
   }
 
+  .idea-container h4, h5 {
+    padding: 5px 0;
+  }
+
   .input-container {
     background-image: linear-gradient(90deg, #53d6d6, #45c69d ); 
     margin-bottom: 5px;
