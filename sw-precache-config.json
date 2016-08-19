@@ -1,7 +1,0 @@
-{
-  "staticFileGlobs": [
-    "dist/**/*",
-    "dist/*"
-  ],
-  "stripPrefix": "dist/"
-}
