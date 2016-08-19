@@ -38,7 +38,7 @@
 
 <style>
   body {
-    background-color: #af59e0;
+    background-color: #3C6997;
   }
 
   #app {

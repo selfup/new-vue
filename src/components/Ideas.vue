@@ -227,7 +227,7 @@
 
   .idea-container {
     position: relative;
-    background-color: white;
+    background-color: #F2F4FF;
     margin-bottom: 5px;
     margin-top: 5px;
     width: 90%;
@@ -239,7 +239,7 @@
   }
 
   .input-container {
-    background-image: linear-gradient(90deg, #53d6d6, #45c69d ); 
+    background-color: #96C5F7;
     margin-bottom: 5px;
     margin-top: 5px;
     width: 90%;
@@ -247,7 +247,7 @@
   }
 
   .sort-search-container {
-    background-color: #57c8f2;
+    background-color: #93ACB5;
     box-shadow: 2px 2px 5px grey;
     margin-bottom: 5px;
     margin-top: 10px;
