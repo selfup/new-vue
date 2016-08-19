@@ -170,6 +170,7 @@
           class="idea-title"
           v-on:click="editidea($index)"
           v-on:keydown.enter="updateidea($event, $index)"
+          v-on:blur="updateidea($event, $index)"
           contenteditable="{{idea.edit}}"
         >
         {{ idea.title }}
@@ -178,6 +179,7 @@
           class="idea-body"
           v-on:click="editidea($index)"
           v-on:keydown.enter="updateidea($event, $index)"
+          v-on:blur="updateidea($event, $index)"
           contenteditable="{{idea.edit}}"
         >
         {{ idea.body }}
@@ -231,7 +233,6 @@
     margin-bottom: 5px;
     margin-top: 5px;
     width: 90%;
-    box-shadow: 2px 2px 5px grey;
   }
 
   .idea-container h4, h5 {
@@ -243,12 +244,10 @@
     margin-bottom: 5px;
     margin-top: 5px;
     width: 90%;
-    box-shadow: 2px 2px 5px grey;
   }
 
   .sort-search-container {
     background-color: #93ACB5;
-    box-shadow: 2px 2px 5px grey;
     margin-bottom: 5px;
     margin-top: 10px;
     width: 90%;
