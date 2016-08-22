@@ -27,8 +27,7 @@
         this.ideas.unshift({
           title: title,
           body: body,
-          quality: 'Swill',
-          edit: false
+          quality: 'Swill'
         })
       },
 
@@ -104,12 +103,7 @@
         const newText = e.target.textContent.trim()
         if (e.target.className === 'idea-title') this.ideas[i].title = newText
         if (e.target.className === 'idea-body') this.ideas[i].body = newText
-        this.ideas[i].edit = false
         this.helper.lspi.setRecord('ideas', this.ideas)
-      },
-
-      editidea (index) {
-        this.ideas[index].edit = true
       }
     }
   }
@@ -168,19 +162,17 @@
         <br>
         <h4
           class="idea-title"
-          v-on:click="editidea($index)"
           v-on:keydown.enter="updateidea($event, $index)"
           v-on:blur="updateidea($event, $index)"
-          contenteditable="{{idea.edit}}"
+          contenteditable="true"
         >
         {{ idea.title }}
         </h4>
         <h5
           class="idea-body"
-          v-on:click="editidea($index)"
           v-on:keydown.enter="updateidea($event, $index)"
           v-on:blur="updateidea($event, $index)"
-          contenteditable="{{idea.edit}}"
+          contenteditable="true"
         >
         {{ idea.body }}
         </h5>
