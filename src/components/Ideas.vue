@@ -221,7 +221,6 @@
   }
 
   .idea-container {
-    position: relative;
     background-color: #F2F4FF;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -244,7 +243,6 @@
     margin-bottom: 5px;
     margin-top: 10px;
     width: 90%;
-    position: center;
   }
 
   .up {
