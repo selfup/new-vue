@@ -160,6 +160,22 @@
     <div v-for="idea in ideas">
       <div class="idea-container container">
         <br>
+        <span
+            class="glyphicon glyphicon-chevron-up up topleft"
+            v-on:click="qualityup($index)"
+          >
+        </span>
+          <span
+            class="glyphicon glyphicon-chevron-down down topleftdown"
+            v-on:click="qualitydown($index)"
+          >
+        </span>
+        <span
+          class="glyphicon glyphicon-remove topright"
+          v-on:click="removeidea($index)"
+        >
+        </span>
+        <br>
         <h4
           class="idea-title"
           v-on:keydown.enter="updateidea($event, $index)"
@@ -177,22 +193,7 @@
         {{ idea.body }}
         </h5>
         <hr>
-          <span
-            class="glyphicon glyphicon-chevron-up up topleft"
-            v-on:click="qualityup($index)"
-          >
-          </span>
-          <span
-            class="glyphicon glyphicon-chevron-down down topleftdown"
-            v-on:click="qualitydown($index)"
-          >
-          </span>
         <span><em>{{ idea.quality }}</em></span><br>
-        <span
-          class="glyphicon glyphicon-remove topright"
-          v-on:click="removeidea($index)"
-        >
-        </span>
         <br>
         </button>
       </div>
@@ -220,7 +221,6 @@
   }
 
   .idea-container {
-    position: relative;
     background-color: #F2F4FF;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -243,7 +243,6 @@
     margin-bottom: 5px;
     margin-top: 10px;
     width: 90%;
-    position: center;
   }
 
   .up {
@@ -255,23 +254,21 @@
   }
 
   .topright {
-      position: absolute;
-      top: 8px;
-      right: 16px;
-      font-size: 18px;
+    float: right;
+    right: 16px;
+    font-size: 18px;
+    padding-left: 17px;
   }
 
   .topleftdown {
-      position: absolute;
-      top: 8px;
-      left: 50px;
-      font-size: 18px;
+    float: left;
+    left: 50px;
+    font-size: 18px;
   }
 
   .topleft {
-      position: absolute;
-      top: 8px;
-      left: 16px;
-      font-size: 18px;
+    float: left;
+    left: 16px;
+    font-size: 18px;
   }
 </style>
