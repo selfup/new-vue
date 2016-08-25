@@ -37,12 +37,6 @@
     }
   }
 
-  @media (max-width: 1199px) {
-    .container p {
-      font-size: 46px;
-    }
-  }
-
   @media (max-width: 991px) {
     .container h1 {
       font-size: 36px;
@@ -50,12 +44,6 @@
   }
 
   @media (max-width: 767px) {
-    .container h1 {
-      font-size: 26px;
-    }
-  }
-
-  @media (max-width: 467px) {
     .container h1 {
       font-size: 26px;
     }
